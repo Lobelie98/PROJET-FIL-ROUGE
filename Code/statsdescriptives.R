@@ -19,6 +19,31 @@ for(i in 1:length(columns)){
 }
 table_matrix <- cbind(columns, na_values)
 
+#Display the factors for every qualitative variable
+print(levels(as.factor(dataset$MiscVal)))
+
+#Conversion de variables qualitatives en variables quantitatives
+
+#Liste des variables à convertir
+labels <- c("GarageYrBlt", "GarageArea", "WoodDeckSF", "OpenPorchSF", "EnclosedPorch", "X3SsnPorch", "ScreenPorch", "PoolArea")
+label <- "GarageYrBlt"
+dataset_transformed <- dataset
+
+for (label in labels){
+  dataset_transformed[label]<-as.numeric(unlist(dataset[label]))
+  print(length(colnames(dataset_transformed)))
+}
+typeof(dataset_transformed$GarageYrBlt)
+
+#Cas de GarageYrBlt
+a <- dataset_transformed %>% filter(GarageYrBlt != 2207)
+max(a, na.rm = TRUE)
+
+bal <- as.numeric(dataset[label])
+print(bal)
+print(as.numeric(dataset$GarageYrBlt))
+boxplot(bal)
+
 
 #Stats descriptives
 ggplot(data=dataset, aes(x = YrSold))+
